@@ -46,7 +46,7 @@ public class RegistrationPage extends BasePage{
     @FindBy(xpath = "//*[@id=\"customerForm\"]/table/tbody/tr[13]/td[2]/input")
     WebElement registerButton;
 
-    @FindBy(xpath = "//*[@id=\"rightPanel\"]/p")
+    @FindBy(xpath = "//*[@id='rightPanel']/p")
     WebElement confirmationMessage;
 
     public void inputFirstName(String firstName){

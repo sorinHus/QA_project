@@ -6,15 +6,19 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import pageObjects.HomePage;
 import pageObjects.RegistrationPage;
+
 import java.util.Map;
+
 import static hooks.GlobalHooks.driver;
 
 public class StepDefinitions {
 
     private static int userCounter = 1; // Counter static pentru username
-    private static String uniqueUser;
+    private String uniqueUser;
 
     @Given("customer is on the homepage")
     public void customerIsOnTheHomePage() {
@@ -30,14 +34,14 @@ public class StepDefinitions {
 
 
 
-    @When("Customer completes registration form using following data:")
+    @When("customer completes registration form using following data:")
     public void customerCompletesRegistrationFormUsingFollowingData(DataTable dataTable) {
         RegistrationPage registrationPage = new RegistrationPage(driver);
 
-        // Convertim tabelul Gherkin într-o hartă (Map)
+        // Convertim tabelul în Map
         Map<String, String> data = dataTable.asMap(String.class, String.class);
 
-        // Populăm câmpurile formularului cu valorile din tabel
+        // Completăm formularul
         registrationPage.inputFirstName(data.get("firstName"));
         registrationPage.inputLastName(data.get("lastName"));
         registrationPage.inputStreetAddress(data.get("address"));
@@ -47,17 +51,15 @@ public class StepDefinitions {
         registrationPage.inputPhoneNumber(data.get("phoneNumber"));
         registrationPage.inputSSN(data.get("SSN"));
 
-        // Generăm un username unic și îl folosim în test
+        // Generăm username unic și îl folosim în test
         uniqueUser = utilities.userCounter.generateUniqueUser();
         registrationPage.inputUsername(uniqueUser);
 
         registrationPage.inputPassword(data.get("password"));
         registrationPage.inputConfirmPassword(data.get("confPassword"));
 
-        // Click pe butonul de înregistrare
-        registrationPage.clickRegisterButton();
+        //registrationPage.clickRegisterButton();
     }
-
 
 
 
@@ -66,18 +68,22 @@ public class StepDefinitions {
         RegistrationPage registrationPage = new RegistrationPage(driver);
                 registrationPage.clickRegisterButton();
     }
-
-
-    //@Then("customer should see a confirmation message with the username")
+    @Then("customer should see a confirmation message")
     public void customerShouldSeeConfirmationMessage() {
-        RegistrationPage registrationPage = new RegistrationPage(driver);
-        String confirmationText = registrationPage.getConfirmationMessage();
+        // Localizează mesajul de confirmare
+        WebElement confirmationMessageElement = driver.findElement(By.xpath("//*[@id='rightPanel']/p"));
 
-        // Verificăm dacă mesajul conține username-ul generat
-        String expectedText = "Welcome " + uniqueUser;
+        // Obține textul efectiv al mesajului
+        String actualMessage = confirmationMessageElement.getText();
 
-        Assert.assertTrue("Confirmation message does not contain the expected username!",
-                confirmationText.contains(expectedText));
+        // Mesajul așteptat
+        String expectedMessage = "Your account was created successfully. You are now logged in.";
+
+        // Debugging - Print mesaj real în consolă
+        System.out.println("Actual confirmation message: " + actualMessage);
+
+        // Asigură-te că mesajul este cel așteptat
+        Assert.assertEquals("Confirmation message is incorrect!", expectedMessage, actualMessage);
     }
 
 }

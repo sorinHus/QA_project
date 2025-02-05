@@ -4,7 +4,6 @@ Feature: Registration flow
     Given customer is on the homepage
     And customer clicks on Register button
     When customer completes registration form using following data:
-
       | firstName    | Sorin        |
       | lastName     | Hus          |
       | address      | First Street |
@@ -16,4 +15,5 @@ Feature: Registration flow
       | password     | 123456       |
       | confPassword | 123456       |
     And customer clicks create account button
+
     Then customer should see a confirmation message with the username
