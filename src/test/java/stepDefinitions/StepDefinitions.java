@@ -58,10 +58,7 @@ public class StepDefinitions {
         registrationPage.inputPassword(data.get("password"));
         registrationPage.inputConfirmPassword(data.get("confPassword"));
 
-        //registrationPage.clickRegisterButton();
     }
-
-
 
     @And("customer clicks create account button")
     public void customerClicksCreateAccountButton() {
@@ -109,10 +106,7 @@ public class StepDefinitions {
 
         registrationPage.inputPassword(data.get("password"));
         registrationPage.inputConfirmPassword(data.get("confPassword"));
-
-        //registrationPage.clickRegisterButton();
     }
-
 
     @And("customer clicks on create account button")
     public void customerClicksOnCreateAccountButton() {
@@ -137,5 +131,50 @@ public class StepDefinitions {
     }
 
 
+    @When("customer completes registration form with password mismatch:")
+    public void customerCompletesRegistrationFormWithPasswordMismatch(DataTable dataTable) {
+        RegistrationPage registrationPage = new RegistrationPage(driver);
 
+        // Convertim tabelul în Map
+        Map<String, String> data = dataTable.asMap(String.class, String.class);
+
+        // Completăm formularul
+        registrationPage.inputFirstName(data.get("firstName"));
+        registrationPage.inputLastName(data.get("lastName"));
+        registrationPage.inputStreetAddress(data.get("address"));
+        registrationPage.inputCity(data.get("city"));
+        registrationPage.inputState(data.get("state"));
+        registrationPage.inputZipCode(data.get("zip_code"));
+        registrationPage.inputPhoneNumber(data.get("phoneNumber"));
+        registrationPage.inputSSN(data.get("SSN"));
+
+        // Generăm username unic și îl folosim în test
+        uniqueUser = utilities.userCounter.generateUniqueUser();
+        registrationPage.inputUsername(uniqueUser);
+
+        registrationPage.inputPassword(data.get("password"));
+        registrationPage.inputConfirmPassword(data.get("confPassword"));
+    }
+
+
+    @And("customer clicks on register account button")
+    public void customerClicksOnRegisterAccountButton() {
+        RegistrationPage registrationPage = new RegistrationPage(driver);
+        registrationPage.clickRegisterButton();
+    }
+
+    @Then("customer should see an error message for the mismatch")
+    public void customerShouldSeeAnErrorMessageForTheMismatch() {
+        // Localizează elementul care conține mesajul de eroare pentru first name
+        WebElement errorMessageElement = driver.findElement(By.id("repeatedPassword.errors"));
+
+        // Obține textul mesajului de eroare
+        String actualErrorMessage = errorMessageElement.getText();
+
+        // Mesajul așteptat
+        String expectedErrorMessage = "Passwords did not match.";
+
+        // Asigură-te că mesajul de eroare este corect
+        Assert.assertEquals("Error message for password mismatch", expectedErrorMessage, actualErrorMessage);
+    }
 }
