@@ -19,3 +19,4 @@ Feature: Account operations
     Given customer is on the Homepage
     When customer is logged in with valid Credentials
     And customer clicks Log out link
+    Then customer is logged out

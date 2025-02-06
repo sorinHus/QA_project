@@ -4,6 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.AccountPage;
@@ -87,7 +88,16 @@ public class AccountStepDefinitions {
     //Scenario: logout
     @And("customer clicks Log out link")
     public void customerClicksLogOutLink() {
+        accountPage = new AccountPage(driver);
+        accountPage.clickLogOutLink();
     }
 
 
+    @Then("customer is logged out")
+    public void customerIsLoggedOut() {
+            // Verificăm dacă URL-ul curent este corect după deconectare
+            String currentURL = driver.getCurrentUrl();
+            Assert.assertEquals(currentURL, "https://parabank.parasoft.com/parabank/index.htm?ConnType=JDBC", "URL-ul nu este corect, utilizatorul nu a fost deconectat!");
+
+        }
 }

@@ -44,6 +44,9 @@ public class AccountPage extends BasePage{
     @FindBy(xpath = "//*[@id=\"loanRequestApproved\"]/p[1]")
     WebElement loanStatusMessage;
 
+    @FindBy(xpath = "//*[@id=\"leftPanel\"]/ul/li[8]/a")
+    WebElement logOutLink;
+
     public void clickNewAccountLink(){
         newAccountLink.click();
     }
@@ -107,5 +110,9 @@ public class AccountPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(loanStatusMessage));
         return loanStatusMessage.getText();
+    }
+
+    public void clickLogOutLink(){
+        logOutLink.click();
     }
 }
