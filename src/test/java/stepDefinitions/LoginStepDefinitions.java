@@ -5,22 +5,18 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import static org.junit.Assert.*;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import pageObjects.HomePage;
 import utilities.userCounter;
 
+import static hooks.GlobalHooks.driver;  // Folosește driver-ul din GlobalHooks
+
 public class LoginStepDefinitions {
 
-    WebDriver driver;
     HomePage homePage;
 
     @Given("customer is on the homePage")
     public void customer_is_on_the_homepage() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("https://parabank.parasoft.com/parabank/index.htm");
-        homePage = new HomePage(driver);
+        homePage = new HomePage(driver);  // Folosește driver-ul existent
     }
 
     @When("customer enters valid credentials")
@@ -36,7 +32,7 @@ public class LoginStepDefinitions {
         String expectedTitle = "Accounts Overview";
         String actualTitle = homePage.getAccountOverviewTitle();
         assertEquals(expectedTitle, actualTitle);
-        driver.quit();
+        //driver.quit();
     }
 
     @When("customer enters valid password")
@@ -45,12 +41,12 @@ public class LoginStepDefinitions {
         homePage.clickLoginButton();
     }
 
-    @Then("customer should error message for missing username")
-    public void customerShouldErrorMessageForMissingUsername() {
+    @Then("customer should see error message for missing username")
+    public void customerShouldSeeErrorMessageForMissingUsername() {
         String expectedTitle = "Please enter a username and password.";
         String actualTitle = homePage.missingUserPassMessage();
         assertEquals(expectedTitle, actualTitle);
-        driver.quit();
+        //driver.quit();
     }
 
     @When("customer enters valid username")
@@ -60,11 +56,35 @@ public class LoginStepDefinitions {
         homePage.clickLoginButton();
     }
 
-    @Then("customer should error message for missing password")
-    public void customerShouldErrorMessageForMissingPassword() {
+    @Then("customer should see error message for missing password")
+    public void customerShouldSeeErrorMessageForMissingPassword() {
         String expectedTitle = "Please enter a username and password.";
         String actualTitle = homePage.missingUserPassMessage();
         assertEquals(expectedTitle, actualTitle);
-        driver.quit();
+        //driver.quit();
+    }
+
+    @When("customer enters valid username and invalid password")
+    public void customerEntersValidUsernameAndInvalidPassword() {
+        String lastCreatedUsername = userCounter.getLastUsername();  // Preia ultimul username generat
+        homePage.enterUsername(lastCreatedUsername);
+        homePage.enterPassword("invalidPassword");  // Parola folosită în scenariul de înregistrare
+        homePage.clickLoginButton();
+    }
+
+    @Then("customer should see error message invalid credentials")
+    public void customerShouldSeeErrorMessageInvalidCredentials() {
+        String expectedTitle = "An internal error has occurred and has been logged.";
+        String actualTitle = homePage.missingUserPassMessage();
+        assertEquals(expectedTitle, actualTitle);
+        //driver.quit();
+    }
+
+    @When("customer enters invalid username")
+    public void customerEntersInvalidUsername() {
+        String lastCreatedUsername = userCounter.getLastUsername();  // Preia ultimul username generat
+        homePage.enterUsername("487invalidUsername");
+        homePage.enterPassword("123456");  // Parola folosită în scenariul de înregistrare
+        homePage.clickLoginButton();
     }
 }
