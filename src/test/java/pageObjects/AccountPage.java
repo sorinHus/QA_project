@@ -1,12 +1,15 @@
 package pageObjects;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class AccountPage extends BasePage{
 
@@ -22,6 +25,24 @@ public class AccountPage extends BasePage{
 
     @FindBy(xpath = "//*[@id=\"openAccountResult\"]/h1")
     WebElement newAccountOpened;
+
+    @FindBy(xpath = "//*[@id=\"leftPanel\"]/ul/li[7]/a")
+    WebElement newLoanRequestlink;
+
+    @FindBy(id = "amount")
+    WebElement loanAmount;
+
+    @FindBy(id = "downPayment")
+    WebElement downPayment;
+
+    @FindBy(id = "fromAccountId")
+    WebElement fromAccountDropdown;
+
+    @FindBy(css = "input[value='Apply Now']")
+    WebElement applyNowButton;
+
+    @FindBy(xpath = "//*[@id='loanStatus']")
+    WebElement loanStatusMessage;
 
     public void clickNewAccountLink(){
         newAccountLink.click();
@@ -52,6 +73,39 @@ public class AccountPage extends BasePage{
         return newAccountOpened.getText();
     }
 
+    public void clickNewLoanRequestLink(){
+        newLoanRequestlink.click();
+    }
 
+    public void inputLoanAmount(String amount) {
+        loanAmount.sendKeys("1000");
+    }
 
+    public void inputDownPayment(String payment) {
+        downPayment.sendKeys("100");
+    }
+
+    public void selectFirstDropdownOption() {
+        Select select = new Select(fromAccountDropdown);
+        List<WebElement> options = select.getOptions();
+
+        if (!options.isEmpty()) {
+            select.selectByIndex(0);  // Selectează prima opțiune
+            System.out.println("Prima opțiune selectată: " + options.get(0).getText());
+        } else {
+            System.out.println("Drop-down-ul nu are opțiuni disponibile!");
+        }
+    }
+
+    public void clickApplyButton() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.elementToBeClickable(applyNowButton));
+        applyNowButton.click();
+    }
+
+    public String getLoanRequestConfirmation() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(loanStatusMessage));
+        return loanStatusMessage.getText();
+    }
 }

@@ -33,7 +33,7 @@ public class AccountStepDefinitions {
         homePage.clickLoginButton();
     }
 
-    @And("clicks Open New Account link")
+    @And("customer clicks Open New Account link")
     public void clicksOpenNewAccountLink() {
         accountPage = new AccountPage(driver);  // Creează instanța odată pentru a o folosi în continuare
         accountPage.clickNewAccountLink();
@@ -43,7 +43,7 @@ public class AccountStepDefinitions {
         wait.until(ExpectedConditions.urlContains("openaccount"));  // Verifică dacă URL-ul conține "account"
     }
 
-    @And("clicks Open New Account button")
+    @And("customer clicks Open New Account button")
     public void clicksOpenNewAccountButton() {
         accountPage.clickNewAccountButton();  // Folosește instanța deja creată
     }
@@ -54,4 +54,32 @@ public class AccountStepDefinitions {
         String actualTitle = accountPage.NewAccountOpened();
         assertEquals(expectedTitle, actualTitle);
     }
+
+    @And("customer clicks Request loan link")
+    public void clicksRequestLoanLink() {
+        accountPage = new AccountPage(driver);
+        accountPage.clickNewLoanRequestLink();
+    }
+
+    @And("customer fills in the form")
+    public void fillsInTheForm() {
+        accountPage.inputLoanAmount("1000");
+        accountPage.inputDownPayment("100");
+        accountPage.selectFirstDropdownOption();
+    }
+
+    @And("customer clicks the Apply now button")
+    public void customerClicksTheApplyNowButton() {
+        accountPage.clickApplyButton();
+    }
+
+//
+//
+//    @Then("customer will see Loan Request confirmation")
+//    public void customerWillSeeLoanRequestConfirmation() {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//        wait.until(ExpectedConditions.visibilityOf(accountPage.getLoanConfirmationMessage()));
+//
+//        assertEquals("Loan request successfully submitted!", accountPage.getLoanConfirmationMessage());
+//    }
 }
