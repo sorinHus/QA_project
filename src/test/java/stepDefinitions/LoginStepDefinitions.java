@@ -32,7 +32,6 @@ public class LoginStepDefinitions {
         String expectedTitle = "Accounts Overview";
         String actualTitle = homePage.getAccountOverviewTitle();
         assertEquals(expectedTitle, actualTitle);
-        //driver.quit();
     }
 
     @When("customer enters valid password")
@@ -46,7 +45,6 @@ public class LoginStepDefinitions {
         String expectedTitle = "Please enter a username and password.";
         String actualTitle = homePage.missingUserPassMessage();
         assertEquals(expectedTitle, actualTitle);
-        //driver.quit();
     }
 
     @When("customer enters valid username")
@@ -61,7 +59,6 @@ public class LoginStepDefinitions {
         String expectedTitle = "Please enter a username and password.";
         String actualTitle = homePage.missingUserPassMessage();
         assertEquals(expectedTitle, actualTitle);
-        //driver.quit();
     }
 
     @When("customer enters valid username and invalid password")
@@ -77,7 +74,6 @@ public class LoginStepDefinitions {
         String expectedTitle = "An internal error has occurred and has been logged.";
         String actualTitle = homePage.missingUserPassMessage();
         assertEquals(expectedTitle, actualTitle);
-        //driver.quit();
     }
 
     @When("customer enters invalid username")
@@ -87,4 +83,5 @@ public class LoginStepDefinitions {
         homePage.enterPassword("123456");  // Parola folosită în scenariul de înregistrare
         homePage.clickLoginButton();
     }
+
 }
