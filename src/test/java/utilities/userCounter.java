@@ -14,6 +14,11 @@ public class userCounter {
         return user;
     }
 
+    public static String getLastUsername() {
+        int counter = getCounterFromFile();
+        return "487user" + (counter - 1);  // Returnează ultimul username generat
+    }
+
     private static int getCounterFromFile() {
         try {
             if (Files.exists(Paths.get(COUNTER_FILE))) {

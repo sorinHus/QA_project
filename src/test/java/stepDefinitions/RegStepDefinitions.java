@@ -15,7 +15,7 @@ import java.util.Map;
 
 import static hooks.GlobalHooks.driver;
 
-public class StepDefinitions {
+public class RegStepDefinitions {
 
     private static int userCounter = 1; // Counter static pentru username
     private String uniqueUser;
@@ -30,8 +30,6 @@ public class StepDefinitions {
         HomePage homePage = new HomePage(driver);
         homePage.registerButton();
     }
-
-
 
 
     @When("customer completes registration form using following data:")
@@ -54,6 +52,7 @@ public class StepDefinitions {
         // Generăm username unic și îl folosim în test
         uniqueUser = utilities.userCounter.generateUniqueUser();
         registrationPage.inputUsername(uniqueUser);
+
 
         registrationPage.inputPassword(data.get("password"));
         registrationPage.inputConfirmPassword(data.get("confPassword"));
