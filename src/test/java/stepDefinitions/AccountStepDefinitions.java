@@ -95,9 +95,8 @@ public class AccountStepDefinitions {
 
     @Then("customer is logged out")
     public void customerIsLoggedOut() {
-            // Verificăm dacă URL-ul curent este corect după deconectare
-            String currentURL = driver.getCurrentUrl();
-            Assert.assertEquals(currentURL, "https://parabank.parasoft.com/parabank/index.htm?ConnType=JDBC", "URL-ul nu este corect, utilizatorul nu a fost deconectat!");
-
-        }
+        // Verificăm dacă URL-ul curent este corect după deconectare
+        String currentURL = driver.getCurrentUrl();
+        Assert.assertEquals(currentURL, "https://parabank.parasoft.com/parabank/index.htm?ConnType=JDBC");
+    }
 }
