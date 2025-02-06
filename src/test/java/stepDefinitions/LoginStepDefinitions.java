@@ -38,4 +38,33 @@ public class LoginStepDefinitions {
         assertEquals(expectedTitle, actualTitle);
         driver.quit();
     }
+
+    @When("customer enters valid password")
+    public void customerEntersValidPassword() {
+        homePage.enterPassword("123456");  // Parola folosită în scenariul de înregistrare
+        homePage.clickLoginButton();
+    }
+
+    @Then("customer should error message for missing username")
+    public void customerShouldErrorMessageForMissingUsername() {
+        String expectedTitle = "Please enter a username and password.";
+        String actualTitle = homePage.missingUserPassMessage();
+        assertEquals(expectedTitle, actualTitle);
+        driver.quit();
+    }
+
+    @When("customer enters valid username")
+    public void customerEntersValidUsername() {
+        String lastCreatedUsername = userCounter.getLastUsername();  // Preia ultimul username generat
+        homePage.enterUsername(lastCreatedUsername);
+        homePage.clickLoginButton();
+    }
+
+    @Then("customer should error message for missing password")
+    public void customerShouldErrorMessageForMissingPassword() {
+        String expectedTitle = "Please enter a username and password.";
+        String actualTitle = homePage.missingUserPassMessage();
+        assertEquals(expectedTitle, actualTitle);
+        driver.quit();
+    }
 }

@@ -25,6 +25,9 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//*[@id=\"showOverview\"]/h1")
     public WebElement accountOverviewTitle;
 
+    @FindBy(xpath = "//*[@id=\"rightPanel\"]/p")
+    public WebElement missingUserPassMessage;
+
     public void registerButton() {
         registerButton.click();
     }
@@ -43,5 +46,9 @@ public class HomePage extends BasePage{
 
     public String getAccountOverviewTitle() {
         return accountOverviewTitle.getText();
+    }
+
+    public String missingUserPassMessage() {
+        return missingUserPassMessage.getText();
     }
 }
