@@ -73,6 +73,13 @@ public class AccountStepDefinitions {
         accountPage.clickApplyButton();
     }
 
+    @Then("customer will see Loan Request confirmation")
+    public void customerWillSeeLoanRequestConfirmation() {
+        String expectedTitle = "Congratulations, your loan has been approved.";
+        String actualTitle = accountPage.getLoanRequestConfirmation();
+        assertEquals(expectedTitle, actualTitle);
+    }
+
 //
 //
 //    @Then("customer will see Loan Request confirmation")

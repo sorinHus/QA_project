@@ -41,7 +41,7 @@ public class AccountPage extends BasePage{
     @FindBy(css = "input[value='Apply Now']")
     WebElement applyNowButton;
 
-    @FindBy(xpath = "//*[@id='loanStatus']")
+    @FindBy(xpath = "//*[@id=\"loanRequestApproved\"]/p[1]")
     WebElement loanStatusMessage;
 
     public void clickNewAccountLink(){

@@ -13,4 +13,4 @@ Feature: Account operations
     And customer clicks Request loan link
     And customer fills in the form
     And customer clicks the Apply now button
-    #Then customer will see Loan Request confirmation
+    Then customer will see Loan Request confirmation
