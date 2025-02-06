@@ -25,7 +25,7 @@ public class AccountStepDefinitions {
         homePage = new HomePage(driver);  // Folosește driver-ul existent
     }
 
-    @When("customer enters valid Credentials")
+    @When("customer is logged in with valid Credentials")
     public void customerEntersValidCredentials() {
         String lastCreatedUsername = userCounter.getLastUsername();  // Preia ultimul username generat
         homePage.enterUsername(lastCreatedUsername);
@@ -33,6 +33,8 @@ public class AccountStepDefinitions {
         homePage.clickLoginButton();
     }
 
+
+    //Scenario: Open new account
     @And("customer clicks Open New Account link")
     public void clicksOpenNewAccountLink() {
         accountPage = new AccountPage(driver);  // Creează instanța odată pentru a o folosi în continuare
@@ -55,6 +57,8 @@ public class AccountStepDefinitions {
         assertEquals(expectedTitle, actualTitle);
     }
 
+
+    //Scenario: loan aplication
     @And("customer clicks Request loan link")
     public void clicksRequestLoanLink() {
         accountPage = new AccountPage(driver);
@@ -80,13 +84,10 @@ public class AccountStepDefinitions {
         assertEquals(expectedTitle, actualTitle);
     }
 
-//
-//
-//    @Then("customer will see Loan Request confirmation")
-//    public void customerWillSeeLoanRequestConfirmation() {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        wait.until(ExpectedConditions.visibilityOf(accountPage.getLoanConfirmationMessage()));
-//
-//        assertEquals("Loan request successfully submitted!", accountPage.getLoanConfirmationMessage());
-//    }
+    //Scenario: logout
+    @And("customer clicks Log out link")
+    public void customerClicksLogOutLink() {
+    }
+
+
 }
