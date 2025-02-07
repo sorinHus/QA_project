@@ -19,6 +19,7 @@ public class LoginStepDefinitions {
         homePage = new HomePage(driver);  // Folosește driver-ul existent
     }
 
+    //Login valid credentials
     @When("customer enters valid credentials")
     public void customer_enters_valid_credentials() {
         String lastCreatedUsername = userCounter.getLastUsername();  // Preia ultimul username generat
@@ -34,6 +35,7 @@ public class LoginStepDefinitions {
         assertEquals(expectedTitle, actualTitle);
     }
 
+    //Login missing username
     @When("customer enters valid password")
     public void customerEntersValidPassword() {
         homePage.enterPassword("123456");  // Parola folosită în scenariul de înregistrare
@@ -47,6 +49,7 @@ public class LoginStepDefinitions {
         assertEquals(expectedTitle, actualTitle);
     }
 
+    //Login missing password
     @When("customer enters valid username")
     public void customerEntersValidUsername() {
         String lastCreatedUsername = userCounter.getLastUsername();  // Preia ultimul username generat
@@ -61,6 +64,7 @@ public class LoginStepDefinitions {
         assertEquals(expectedTitle, actualTitle);
     }
 
+    //Login valid username invalid password
     @When("customer enters valid username and invalid password")
     public void customerEntersValidUsernameAndInvalidPassword() {
         String lastCreatedUsername = userCounter.getLastUsername();  // Preia ultimul username generat
@@ -76,6 +80,8 @@ public class LoginStepDefinitions {
         assertEquals(expectedTitle, actualTitle);
     }
 
+
+    //login invalid username
     @When("customer enters invalid username")
     public void customerEntersInvalidUsername() {
         String lastCreatedUsername = userCounter.getLastUsername();  // Preia ultimul username generat

@@ -15,7 +15,6 @@ Feature: Registration flow
       | password     | 123456       |
       | confPassword | 123456       |
     And customer clicks create account button
-
     Then customer should see a confirmation message
 
   Scenario: Registration with missing required fields
