@@ -83,6 +83,10 @@ public class AccountStepDefinitions {
         String expectedTitle = "Congratulations, your loan has been approved.";
         String actualTitle = accountPage.getLoanRequestConfirmation();
         assertEquals(expectedTitle, actualTitle);
+
+        //Log-out
+        AccountPage accountPage = new AccountPage(driver);
+        accountPage.clickLogOutLink();
     }
 
     //Scenario: logout

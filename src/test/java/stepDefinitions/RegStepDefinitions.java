@@ -8,6 +8,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import pageObjects.AccountPage;
 import pageObjects.HomePage;
 import pageObjects.RegistrationPage;
 
@@ -63,6 +64,8 @@ public class RegStepDefinitions {
     public void customerClicksCreateAccountButton() {
         RegistrationPage registrationPage = new RegistrationPage(driver);
                 registrationPage.clickRegisterButton();
+
+
     }
     @Then("customer should see a confirmation message")
     public void customerShouldSeeConfirmationMessage() {
@@ -80,6 +83,10 @@ public class RegStepDefinitions {
 
         // Asigură-te că mesajul este cel așteptat
         Assert.assertEquals("Confirmation message is incorrect!", expectedMessage, actualMessage);
+
+        //Log-out
+        AccountPage accountPage = new AccountPage(driver);
+        accountPage.clickLogOutLink();
     }
 
     @When("customer completes registration form with missing data:")
