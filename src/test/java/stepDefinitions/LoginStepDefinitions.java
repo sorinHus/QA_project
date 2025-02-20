@@ -5,6 +5,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import static org.junit.Assert.*;
 
+import pageObjects.AccountPage;
 import pageObjects.HomePage;
 import utilities.userCounter;
 
@@ -26,6 +27,8 @@ public class LoginStepDefinitions {
         homePage.enterUsername(lastCreatedUsername);
         homePage.enterPassword("123456");  // Parola folosită în scenariul de înregistrare
         homePage.clickLoginButton();
+
+
     }
 
     @Then("customer should be redirected to the account overview page")
@@ -33,6 +36,10 @@ public class LoginStepDefinitions {
         String expectedTitle = "Accounts Overview";
         String actualTitle = homePage.getAccountOverviewTitle();
         assertEquals(expectedTitle, actualTitle);
+
+        //Log-out
+        AccountPage accountPage = new AccountPage(driver);
+        accountPage.clickLogOutLink();
     }
 
     //Login missing username
