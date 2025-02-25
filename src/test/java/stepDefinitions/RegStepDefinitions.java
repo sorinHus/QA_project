@@ -81,7 +81,7 @@ public class RegStepDefinitions {
         // Debugging - Print mesaj real în consolă
         System.out.println("Actual confirmation message: " + actualMessage);
 
-        // Asigură-te că mesajul este cel așteptat
+        // Ne asigurăm că mesajul este cel așteptat
         Assert.assertEquals("Confirmation message is incorrect!", expectedMessage, actualMessage);
 
         //Log-out
