@@ -10,8 +10,9 @@ import org.junit.runner.RunWith;
                 "src/test/resources/features/Login.feature",
                 "src/test/resources/features/Registration.feature"},
         glue = {"stepDefinitions", "hooks"},  // Include și hooks
-        tags = "@SmokeTest or @Regression",
-        plugin = {"pretty", "html:target/cucumber-reports.html"},
+        tags = "@test1 or @Regression",
+        plugin = {"pretty", "html:reports/myreport.html",
+                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
         monochrome = true
 )
 public class TestRunner {

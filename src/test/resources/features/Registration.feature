@@ -1,5 +1,6 @@
 Feature: Registration flow
 
+  @SmokeTest
   Scenario: Successful registration
     Given customer is on the homepage
     And customer clicks on Register button
@@ -17,6 +18,7 @@ Feature: Registration flow
     And customer clicks create account button
     Then customer should see a confirmation message
 
+    @SmokeTest
   Scenario: Registration with missing required fields
     Given customer is on the homepage
     And customer clicks on Register button
@@ -34,6 +36,7 @@ Feature: Registration flow
     And customer clicks on create account button
     Then customer should see an error message for the missing first name
 
+      @SmokeTest
   Scenario: Registration with password mismatch
     Given customer is on the homepage
     And customer clicks on Register button
