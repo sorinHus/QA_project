@@ -1,6 +1,6 @@
 Feature: Registration flow
 
-  @SmokeTest
+  @Sanity
   Scenario: Successful registration
     Given customer is on the homepage
     And customer clicks on Register button
