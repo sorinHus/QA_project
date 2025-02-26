@@ -1,5 +1,6 @@
 Feature: Account operations
 
+  @newAcc
   Scenario: Open new account
     Given customer is on the Homepage
     When customer is logged in with valid Credentials
@@ -7,6 +8,7 @@ Feature: Account operations
     And customer clicks Open New Account button
     Then customer will see Account opened confirmation
 
+    @newLoan
   Scenario: Successful application for loan
     Given customer is on the Homepage
     When customer is logged in with valid Credentials
@@ -15,6 +17,7 @@ Feature: Account operations
     And customer clicks the Apply now button
     Then customer will see Loan Request confirmation
 
+      @logOut
   Scenario: Successful logging out
     Given customer is on the Homepage
     When customer is logged in with valid Credentials
