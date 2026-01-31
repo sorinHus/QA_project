@@ -85,8 +85,8 @@ public class RegStepDefinitions {
         Assert.assertEquals("Confirmation message is incorrect!", expectedMessage, actualMessage);
 
         //Log-out
-        AccountPage accountPage = new AccountPage(driver);
-        accountPage.clickLogOutLink();
+//        AccountPage accountPage = new AccountPage(driver);
+//        accountPage.clickLogOutLink();
     }
 
     @When("customer completes registration form with missing data:")

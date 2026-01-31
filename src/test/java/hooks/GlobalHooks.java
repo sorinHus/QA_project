@@ -22,7 +22,7 @@ public class GlobalHooks {
         driver.get("https://parabank.parasoft.com/parabank/index.htm");
     }
 
-    @After
+    //@After
     public void tearDown(){
         driver.quit();
     }
